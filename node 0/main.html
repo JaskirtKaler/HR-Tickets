@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Ticket Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --input-bg: rgba(15, 23, 42, 0.6);
+            --badge-open-bg: rgba(16, 185, 129, 0.15);
+            --badge-open-text: #34d399;
+            --badge-open-border: rgba(16, 185, 129, 0.3);
+            --badge-high-bg: rgba(244, 63, 94, 0.15);
+            --badge-high-text: #fb7185;
+            --badge-high-border: rgba(244, 63, 94, 0.3);
+            --badge-med-bg: rgba(245, 158, 11, 0.15);
+            --badge-med-text: #fbbf24;
+            --badge-med-border: rgba(245, 158, 11, 0.3);
+            --badge-low-bg: rgba(99, 102, 241, 0.15);
+            --badge-low-text: #818cf8;
+            --badge-low-border: rgba(99, 102, 241, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 840px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 18px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: inherit;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Glassmorphism Panel */
+        .panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 24px;
+        }
+
+        /* Form Layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 3;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            letter-spacing: 0.3px;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+        }
+
+        /* Action Buttons */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 28px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+        }
+
+        /* Loading Spinner */
+        .spinner-container {
+            display: none;
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Ticket Confirmation Card */
+        .ticket-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 22px;
+            margin-top: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .ticket-id {
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #818cf8;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-open {
+            background: var(--badge-open-bg);
+            color: var(--badge-open-text);
+            border: 1px solid var(--badge-open-border);
+        }
+
+        .badge-high {
+            background: var(--badge-high-bg);
+            color: var(--badge-high-text);
+            border: 1px solid var(--badge-high-border);
+        }
+
+        .badge-medium {
+            background: var(--badge-med-bg);
+            color: var(--badge-med-text);
+            border: 1px solid var(--badge-med-border);
+        }
+
+        .badge-low {
+            background: var(--badge-low-bg);
+            color: var(--badge-low-text);
+            border: 1px solid var(--badge-low-border);
+        }
+
+        .ticket-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            color: var(--text-main);
+        }
+
+        .ticket-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 14px;
+            border-radius: 8px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-value {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
+
+        .ticket-description {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .text-response {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>HR Support Portal</h1>
+            <p>File a new ticket or check status with HR Operations</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tab-nav">
+            <button class="tab-btn active" id="tabSubmitBtn" onclick="switchTab('submit')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                Create HR Ticket
+            </button>
+            <button class="tab-btn" id="tabAskBtn" onclick="switchTab('ask')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Ask HR AI Assistant
+            </button>
+        </div>
+
+        <!-- CREATE TICKET TAB CONTENT -->
+        <div id="submitTab" class="panel">
+            <h2 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 18px; color: #cbd5e1;">Submit New Ticket</h2>
+            <form id="createTicketForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="employeeId">Employee ID</label>
+                        <input type="text" id="employeeId" placeholder="e.g., EMP-402" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" required>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Operations">Operations</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="Payroll / PTO">Payroll / PTO</option>
+                            <option value="Benefits & Health">Benefits & Health</option>
+                            <option value="IT & Access">IT & Access</option>
+                            <option value="Workplace & Facilities">Workplace & Facilities</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="ticketTitle">Issue Title</label>
+                        <input type="text" id="ticketTitle" placeholder="e.g., Direct deposit routing split issue"
+                            required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="ticketDescription">Detailed Description</label>
+                        <textarea id="ticketDescription" placeholder="Describe your request or issue in detail..."
+                            required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="loadSampleData()">
+                        ⚡ Fill Sample Data
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        Submit Ticket
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- AI ASSISTANT TAB CONTENT -->
+        <div id="askTab" class="panel" style="display: none;">
+            <h2 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 14px; color: #cbd5e1;">HR Assistant Inquiry
+            </h2>
+            <form id="aiPromptForm">
+                <div style="display: flex; gap: 12px;">
+                    <input type="text" id="aiPrompt"
+                        placeholder="e.g., Show me high priority payroll tickets or ask policy question...">
+                    <button type="submit" class="btn-primary">Search / Ask</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- SPINNER -->
+        <div class="spinner-container" id="spinner">
+            <div class="spinner"></div>
+            <p id="spinnerText">Submitting ticket to HR Gateway...</p>
+        </div>
+
+        <!-- RESPONSE CONTAINER -->
+        <div id="responseContainer"></div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const submitTab = document.getElementById('submitTab');
+            const askTab = document.getElementById('askTab');
+            const tabSubmitBtn = document.getElementById('tabSubmitBtn');
+            const tabAskBtn = document.getElementById('tabAskBtn');
+            const responseContainer = document.getElementById('responseContainer');
+
+            responseContainer.innerHTML = '';
+
+            if (tab === 'submit') {
+                submitTab.style.display = 'block';
+                askTab.style.display = 'none';
+                tabSubmitBtn.classList.add('active');
+                tabAskBtn.classList.remove('active');
+            } else {
+                submitTab.style.display = 'none';
+                askTab.style.display = 'block';
+                tabSubmitBtn.classList.remove('active');
+                tabAskBtn.classList.add('active');
+            }
+        }
+
+        function loadSampleData() {
+            document.getElementById('employeeId').value = 'EMP-402';
+            document.getElementById('department').value = 'Engineering';
+            document.getElementById('category').value = 'Payroll / PTO';
+            document.getElementById('ticketTitle').value = 'Direct deposit routing split issue';
+            document.getElementById('ticketDescription').value = 'I updated my direct deposit settings to split 20% into my savings account starting this pay cycle, but 100% was still deposited into my primary checking. Please check if the payroll update went through before Friday\'s distribution.';
+        }
+
+        function createBadge(text, typeClass) {
+            return `<span class="badge ${typeClass}">${text}</span>`;
+        }
+
+        function renderTicketCard(ticket) {
+            let priorityBadgeHTML = '';
+            if (ticket.priority) {
+                let priorityClass = 'badge-medium';
+                if (ticket.priority === 'HIGH') priorityClass = 'badge-high';
+                if (ticket.priority === 'LOW') priorityClass = 'badge-low';
+                priorityBadgeHTML = createBadge(ticket.priority, priorityClass);
+            }
+
+            const formattedDate = ticket.created_at
+                ? new Date(ticket.created_at).toLocaleString()
+                : new Date().toLocaleString();
+
+            return `
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <div class="ticket-id-group">
+                            <span class="ticket-id">${ticket.ticket_id || 'HR-2026-PENDING'}</span>
+                        </div>
+                        <div class="badge-group">
+                            ${createBadge(ticket.status || 'OPEN', 'badge-open')}
+                            ${priorityBadgeHTML}
+                        </div>
+                    </div>
+                    <h3 class="ticket-title">${ticket.title || 'Untitled Ticket'}</h3>
+                    <div class="ticket-meta-grid">
+                        <div class="meta-item">
+                            <span class="meta-label">Employee ID</span>
+                            <span class="meta-value">${ticket.employee_id || 'N/A'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Department</span>
+                            <span class="meta-value">${ticket.department || 'N/A'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Category</span>
+                            <span class="meta-value">${ticket.category || 'N/A'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Created At</span>
+                            <span class="meta-value">${formattedDate}</span>
+                        </div>
+                    </div>
+                    ${ticket.description ? `
+                        <div class="ticket-description">
+                            <strong>Description:</strong><br>
+                            ${ticket.description}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // TICKET SUBMISSION HANDLER
+        // PORT 8080 for HTTP server. SO NODE 1 server
+        document.getElementById('createTicketForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const ticketPayload = {
+                ticket_id: `HR-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+                employee_id: document.getElementById('employeeId').value,
+                department: document.getElementById('department').value,
+                category: document.getElementById('category').value,
+                status: "OPEN",
+                created_at: new Date().toISOString(),
+                title: document.getElementById('ticketTitle').value,
+                description: document.getElementById('ticketDescription').value
+            };
+
+            const spinner = document.getElementById('spinner');
+            const spinnerText = document.getElementById('spinnerText');
+            const responseContainer = document.getElementById('responseContainer');
+
+            responseContainer.innerHTML = '';
+            spinnerText.innerText = "Submitting ticket to HR Gateway...";
+            spinner.style.display = 'block';
+
+            try {
+                const res = await fetch('http://localhost:8080/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(ticketPayload)
+                });
+
+                const data = await res.json();
+                spinner.style.display = 'none';
+
+                responseContainer.innerHTML = `
+                    <div class="panel" style="border-color: rgba(16, 185, 129, 0.4);">
+                        <div style="display: flex; align-items: center; gap: 10px; color: #34d399; margin-bottom: 14px; font-weight: 600;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            Ticket Successfully Created & Submitted!
+                        </div>
+                        ${renderTicketCard(data && data.ticket_id ? data : ticketPayload)}
+                    </div>
+                `;
+            } catch (error) {
+                spinner.style.display = 'none';
+                responseContainer.innerHTML = `
+                    <div class="panel" style="border-color: rgba(99, 102, 241, 0.4);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #818cf8; font-weight: 600;">Ticket Created (Frontend Preview)</span>
+                            <span style="color: #94a3b8; font-size: 0.8rem;">Gateway API Offline</span>
+                        </div>
+                        ${renderTicketCard(ticketPayload)}
+                    </div>
+                `;
+            }
+        });
+
+        // AI ASSISTANT FORM HANDLER
+        document.getElementById('aiPromptForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const prompt = document.getElementById('aiPrompt').value;
+            const spinner = document.getElementById('spinner');
+            const spinnerText = document.getElementById('spinnerText');
+            const responseContainer = document.getElementById('responseContainer');
+
+            responseContainer.innerHTML = '';
+            spinnerText.innerText = "Querying HR AI Assistant...";
+            spinner.style.display = 'block';
+
+            try {
+                const res = await fetch('http://localhost:8080/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const data = await res.json();
+                spinner.style.display = 'none';
+
+                let rawContent = data.answer || data;
+                let parsedJSON = null;
+
+                if (typeof rawContent === 'string') {
+                    try { parsedJSON = JSON.parse(rawContent); } catch (err) { }
+                } else if (typeof rawContent === 'object') {
+                    parsedJSON = rawContent;
+                }
+
+                if (parsedJSON && (parsedJSON.ticket_id || Array.isArray(parsedJSON))) {
+                    const tickets = Array.isArray(parsedJSON) ? parsedJSON : [parsedJSON];
+                    responseContainer.innerHTML = `
+                        <div class="panel">
+                            <h3 style="font-size: 1rem; color: #cbd5e1; margin-bottom: 12px;">Found Ticket Record(s)</h3>
+                            ${tickets.map(renderTicketCard).join('')}
+                        </div>
+                    `;
+                } else {
+                    const text = typeof rawContent === 'string' ? rawContent : JSON.stringify(rawContent, null, 2);
+                    responseContainer.innerHTML = `
+                        <div class="panel">
+                            <div class="text-response">${text}</div>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                spinner.style.display = 'none';
+                responseContainer.innerHTML = `
+                    <div class="panel" style="border-color: rgba(244, 63, 94, 0.4);">
+                        <div class="text-response" style="color: #fb7185;">
+                            Unable to connect to Gateway API at <code>http://localhost:8080/api/chat</code>. Make sure the backend server is running.
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+
+</html>
