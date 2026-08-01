@@ -70,10 +70,10 @@ func (cl *ConcurrencyLimiter) Total() int64 {
 
 // RedisLockManager manages distributed locks in Redis with in-memory fallback
 type RedisLockManager struct {
-	client     *redis.Client
+	client      *redis.Client
 	isAvailable bool
-	mu         sync.Mutex
-	memLocks   map[string]*sync.Mutex
+	mu          sync.Mutex
+	memLocks    map[string]*sync.Mutex
 }
 
 func NewRedisLockManager(redisAddr string) *RedisLockManager {
@@ -208,10 +208,10 @@ func getEnv(key, defaultVal string) string {
 
 func main() {
 	port := getEnv("PORT", ":8080")
-	node2URL := getEnv("NODE2_URL", "http://localhost:8081/api/process")
+	node2URL := getEnv("NODE2_URL", "http://localhost:8081/api/process") // second server
 	redisAddr := getEnv("REDIS_ADDR", "localhost:6379")
 
-	maxConcurrencyStr := getEnv("MAX_CONCURRENCY", "10")
+	maxConcurrencyStr := getEnv("MAX_CONCURRENCY", "10") // max limit of requests
 	maxConcurrency, _ := strconv.Atoi(maxConcurrencyStr)
 	if maxConcurrency <= 0 {
 		maxConcurrency = 10
@@ -335,10 +335,10 @@ func main() {
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		statusMap := map[string]interface{}{
-			"node":                "node 1 (Manager Gateway)",
-			"status":              "healthy",
-			"active_concurrency":  limiter.Active(),
-			"total_requests":      limiter.Total(),
+			"node":               "node 1 (Manager Gateway)",
+			"status":             "healthy",
+			"active_concurrency": limiter.Active(),
+			"total_requests":     limiter.Total(),
 			"redis_available":    lockMgr.isAvailable,
 			"target_node2_url":   node2URL,
 		}
