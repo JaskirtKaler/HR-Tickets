@@ -1,0 +1,202 @@
+[
+  {
+    "ticket_id": "TICK-1001",
+    "employee_id": "EMP-101",
+    "department": "Engineering",
+    "category": "Hardware",
+    "status": "Open",
+    "created_at": "2026-07-31T23:00:00Z",
+    "title": "MacBook Pro M3 screen flicker issue",
+    "description": "The display blinks every few minutes when connected to external monitor."
+  },
+  {
+    "ticket_id": "TICK-1002",
+    "employee_id": "EMP-102",
+    "department": "Human Resources",
+    "category": "Benefits",
+    "status": "Open",
+    "created_at": "2026-07-31T23:01:00Z",
+    "title": "Health insurance enrollment inquiry",
+    "description": "Need assistance adding dependent to vision and dental policy."
+  },
+  {
+    "ticket_id": "TICK-1003",
+    "employee_id": "EMP-103",
+    "department": "Sales",
+    "category": "Payroll",
+    "status": "Open",
+    "created_at": "2026-07-31T23:02:00Z",
+    "title": "Q2 Commission payout discrepancy",
+    "description": "Commission statement shows $1,200 instead of expected $1,850."
+  },
+  {
+    "ticket_id": "TICK-1004",
+    "employee_id": "EMP-104",
+    "department": "Marketing",
+    "category": "Software Access",
+    "status": "Open",
+    "created_at": "2026-07-31T23:03:00Z",
+    "title": "Figma Enterprise seat request",
+    "description": "Need access to design system UI library for upcoming product launch."
+  },
+  {
+    "ticket_id": "TICK-1005",
+    "employee_id": "EMP-105",
+    "department": "Finance",
+    "category": "Reimbursement",
+    "status": "Open",
+    "created_at": "2026-07-31T23:04:00Z",
+    "title": "Travel expense report approval pending",
+    "description": "Submitted client visit expense report #EXP-889 10 days ago."
+  },
+  {
+    "ticket_id": "TICK-1006",
+    "employee_id": "EMP-106",
+    "department": "Customer Support",
+    "category": "Hardware",
+    "status": "Open",
+    "created_at": "2026-07-31T23:05:00Z",
+    "title": "Noise canceling headset replacement",
+    "description": "Microphone cuts out during customer support calls."
+  },
+  {
+    "ticket_id": "TICK-1007",
+    "employee_id": "EMP-107",
+    "department": "Legal",
+    "category": "Policy",
+    "status": "Open",
+    "created_at": "2026-07-31T23:06:00Z",
+    "title": "Remote work policy clarification",
+    "description": "Question regarding international remote work allowances."
+  },
+  {
+    "ticket_id": "TICK-1008",
+    "employee_id": "EMP-108",
+    "department": "Operations",
+    "category": "Badge & Access",
+    "status": "Open",
+    "created_at": "2026-07-31T23:07:00Z",
+    "title": "Building keycard access stopped working",
+    "description": "Keycard rejected at floor 4 turnstiles after 6 PM."
+  },
+  {
+    "ticket_id": "TICK-1009",
+    "employee_id": "EMP-109",
+    "department": "Engineering",
+    "category": "VPN & Network",
+    "status": "Open",
+    "created_at": "2026-07-31T23:08:00Z",
+    "title": "VPN connection drops every 30 minutes",
+    "description": "GlobalProtect VPN disconnects frequently during remote sessions."
+  },
+  {
+    "ticket_id": "TICK-1010",
+    "employee_id": "EMP-110",
+    "department": "Product",
+    "category": "PTO & Leave",
+    "status": "Open",
+    "created_at": "2026-07-31T23:09:00Z",
+    "title": "Paternity leave policy & scheduling",
+    "description": "Requesting information on parental leave entitlement starting next month."
+  },
+  {
+    "ticket_id": "TICK-1011",
+    "employee_id": "EMP-111",
+    "department": "Design",
+    "category": "Hardware",
+    "status": "Open",
+    "created_at": "2026-07-31T23:10:00Z",
+    "title": "4K Graphic monitor calibration",
+    "description": "Colors on secondary monitor are washed out."
+  },
+  {
+    "ticket_id": "TICK-1012",
+    "employee_id": "EMP-112",
+    "department": "IT Support",
+    "category": "Software Access",
+    "status": "Open",
+    "created_at": "2026-07-31T23:11:00Z",
+    "title": "Jira Admin permissions setup",
+    "description": "Need project creation rights in Jira for sprint management."
+  },
+  {
+    "ticket_id": "TICK-1013",
+    "employee_id": "EMP-113",
+    "department": "Sales",
+    "category": "Training",
+    "status": "Open",
+    "created_at": "2026-07-31T23:12:00Z",
+    "title": "Salesforce Advanced CRM course reimbursement",
+    "description": "Completed certification course, requesting $450 fee reimbursement."
+  },
+  {
+    "ticket_id": "TICK-1014",
+    "employee_id": "EMP-114",
+    "department": "Security",
+    "category": "Security",
+    "status": "Open",
+    "created_at": "2026-07-31T23:13:00Z",
+    "title": "2FA YubiKey token request",
+    "description": "Hardware security key required for production server access."
+  },
+  {
+    "ticket_id": "TICK-1015",
+    "employee_id": "EMP-115",
+    "department": "Engineering",
+    "category": "Software Access",
+    "status": "Open",
+    "created_at": "2026-07-31T23:14:00Z",
+    "title": "GitHub Copilot Enterprise license",
+    "description": "Requesting Copilot AI license assigned to my GitHub handle."
+  },
+  {
+    "ticket_id": "TICK-1016",
+    "employee_id": "EMP-116",
+    "department": "Human Resources",
+    "category": "Onboarding",
+    "status": "Open",
+    "created_at": "2026-07-31T23:15:00Z",
+    "title": "New hire welcome kit & laptop setup",
+    "description": "Preparing laptop shipment for candidate starting Monday."
+  },
+  {
+    "ticket_id": "TICK-1017",
+    "employee_id": "EMP-117",
+    "department": "Finance",
+    "category": "Payroll",
+    "status": "Open",
+    "created_at": "2026-07-31T23:16:00Z",
+    "title": "W-2 Tax form re-issuance request",
+    "description": "Need digital copy of W-2 for prior tax year."
+  },
+  {
+    "ticket_id": "TICK-1018",
+    "employee_id": "EMP-118",
+    "department": "Marketing",
+    "category": "Software Access",
+    "status": "Open",
+    "created_at": "2026-07-31T23:17:00Z",
+    "title": "HubSpot Marketing Hub access",
+    "description": "Need editor access to email campaign templates."
+  },
+  {
+    "ticket_id": "TICK-1019",
+    "employee_id": "EMP-119",
+    "department": "Customer Support",
+    "category": "Ergonomics",
+    "status": "Open",
+    "created_at": "2026-07-31T23:18:00Z",
+    "title": "Standing desk assessment request",
+    "description": "Ergonomic chair and adjustable desk evaluation."
+  },
+  {
+    "ticket_id": "TICK-1020",
+    "employee_id": "EMP-120",
+    "department": "Executive",
+    "category": "Travel",
+    "status": "Open",
+    "created_at": "2026-07-31T23:19:00Z",
+    "title": "Annual Leadership Summit flight booking",
+    "description": "Booking flights and accommodation for Q3 leadership retreat."
+  }
+]
